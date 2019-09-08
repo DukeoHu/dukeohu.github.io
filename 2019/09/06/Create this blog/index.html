@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="en">
+<html class="theme-next gemini use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习,">
+  <meta name="keywords" content="Learning,">
 
 
 
@@ -79,18 +79,26 @@
 
 
 
-<meta name="description" content="搭建的过程并非一帆风顺，而这些总是要自己做过了才会知道。站着说话相比是十分轻松的，弯着腰做事的才会呼吸得到第一手的空气。">
-<meta name="keywords" content="学习">
+<meta name="description" content="GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。">
+<meta name="keywords" content="Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录一下博客搭建过程">
+<meta property="og:title" content="The Note of Building Blog">
 <meta property="og:url" content="http://yoursite.com/2019/09/06/Create this blog/index.html">
 <meta property="og:site_name" content="DH&#39;s Blog">
-<meta property="og:description" content="搭建的过程并非一帆风顺，而这些总是要自己做过了才会知道。站着说话相比是十分轻松的，弯着腰做事的才会呼吸得到第一手的空气。">
+<meta property="og:description" content="GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-06T15:52:22.702Z">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/dukeohu.github.io.jpg">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/ssh.jpg">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/ssh-github.jpg">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/npm-v.jpg">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/deploy.jpg">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/next.jpg">
+<meta property="og:image" content="http://yoursite.com/create-this-blog-images/schemesetting.jpg">
+<meta property="og:updated_time" content="2019-09-08T02:51:58.380Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记录一下博客搭建过程">
-<meta name="twitter:description" content="搭建的过程并非一帆风顺，而这些总是要自己做过了才会知道。站着说话相比是十分轻松的，弯着腰做事的才会呼吸得到第一手的空气。">
+<meta name="twitter:title" content="The Note of Building Blog">
+<meta name="twitter:description" content="GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。">
+<meta name="twitter:image" content="http://yoursite.com/create-this-blog-images/dukeohu.github.io.jpg">
 
 
 
@@ -98,7 +106,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -126,7 +134,7 @@
 
 
 
-  <title>记录一下博客搭建过程 | DH's Blog</title>
+  <title>The Note of Building Blog | DH's Blog</title>
   
 
 
@@ -250,7 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">记录一下博客搭建过程</h1>
+          <h1 class="post-title" itemprop="name headline">The Note of Building Blog</h1>
         
 
         <div class="post-meta">
@@ -300,8 +308,92 @@
       
 
       
-        <p>搭建的过程并非一帆风顺，而这些总是要自己做过了才会知道。站着说话相比是十分轻松的，弯着腰做事的才会呼吸得到第一手的空气。</p>
+        <p>GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。</p>
+<a id="more"></a>
 
+
+<blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
+<footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
+<h2>Preface:</h2><br>
+&emsp;搭建的过程并非一帆风顺，而这些总是要自己做过了才会知道。站着说话相比是十分轻松的，弯着腰做事的才会体会得到你未曾经历的滋味。
+<br>
+<h2>搭建步骤:</h2>
+<li>GitHub创建仓库
+</li><li>安装Git
+</li><li>安装Node.js
+</li><li>安装Hexo
+</li><li>绑定GitHub,网站推送
+</li><li>个性化配置
+</li><li>发表文章
+<br>
+<h3>GitHub创建仓库</h3>
+&emsp;首先，登录GitHub仓库，创建新的仓库，名字以XXX.github.io为标准，XXX就是GitHub的账户名。比如说我的dukeohu.github.com<br>
+<img src="/create-this-blog-images/dukeohu.github.io.jpg" class="img" width="500" height="200">
+<br>
+<h3>安装Git</h3>
+Git是开源的分布式版本控制系统，用于快速高效地处理项目文件。本地搭建好网站，需要同步网站至Github上，就需要Git进行处理。下载Git推荐从官网下载:<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git-Download</a>,我的机子是64位便选择了64的程序进行安装，安装完成后需要进行Git与Github绑定操作。<br>
+首先右键打开Git,配置user.name和user.email信息:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;GitHub账户名&quot;</span><br><span class="line">git config --global user.email &quot;GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+生成SSH密钥文件:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+然后找到生成的.ssh目录中id_rsa.pub密钥，复制全部内容粘贴到Github的Setting中SSH Keys中：<br>
+<img src="/create-this-blog-images/ssh.jpg" class="ssh">
+最后，在Git Bash中检测GitHub的公钥是否设置成功，输入ssh git@github.com:
+<img src="/create-this-blog-images/ssh-github.jpg" class="ssh">
+<br>
+如果和以上返回的信息相同，说明我们的安装成功。这种方式可以避免每次都输入Github的密码，在我们电脑上存储的是Git私钥，Github上存储的是Git公钥，采用非对称加密方式。
+
+<br>
+<h3>安装Node.js</h3>
+Hexo框架基于Node.js，所以我们首先需要下载<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Download|Node.js</a>，安装完成后在cmd命令行中输入node-v和npm -v查看是否返回版本信息：
+<img src="/create-this-blog-images/npm-v.jpg" class="npm-v">
+<br>
+
+<h3>安装Hexo</h3>
+Hexo安装需要先创建我们放置博客的目录，在CMD命令行中进入该目录，使用npm命令安装Hexo，输入:（最好挂个梯子）
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+等待安装完成后，初始化博客，输入:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+该命令会在我们的博客目录下创建一个blog目录，里面包含整个博客的代码。
+<br>
+此时在blog目录下按输入顺序输入以下三条命令：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new test</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+便可以生成网站预览，输入localhost:4000便可以查看我们生成的网站,且网站中会包含一篇标题为test的文章。<br>
+hexo new "文章名" --新建文章<br>
+hexo g ---生成hexo内容，一般第一安装时使用<br>
+hexo s ---启动本地服务预览<br>
+hexo d ---部署至Github中去<br>
+<br>
+hexo server -p 端口 ---自定义本地端口，注意不会修改Github中访问的80端口，这个80端口是无法修改的<br>
+hexo server -i IP地址  ---自定义IP<br>
+
+
+<h3>绑定GitHub,网站推送</h3>
+此时本地网站已经部署完毕了，我们需要将其推送至Github中去,但在这之前我们需要先修改站点的配置文件，位于blog即我们初始化的博客目录中，修改_config.yml文件:
+<img src="/create-this-blog-images/deploy.jpg" class="deploy">
+<br>
+保存该站点配置文件。
+<br>
+该步骤的目的在于给hexo d 命令进行配置，让hexo知道我们将会把博客部署在Github的那个仓库下。然后安装Git部署插件，在我们初始化的博客目录blog下输入该命令：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在博客目录blog下再次输入以下三条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>等待命令完成后，打开浏览器输入<a href="https://dukeohu.github.io就可以看到我的博客已经上线了，可以在网络上被访问了。" target="_blank" rel="noopener">https://dukeohu.github.io就可以看到我的博客已经上线了，可以在网络上被访问了。</a><br><br></p>
+<h3>个性化配置</h3>
+感觉Hexo的默认主题自己难以接受，可以尝试换换口味哈，主题传送门如下：
+<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Thems</a>
+找到相应的主题后，在CMD命令行中进入blog博客目录,以next主题为例执行以下命令：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+然后打开站点的_config.yml配置文件，修改主题为next,注意前面有空格:
+<img src="/create-this-blog-images/next.jpg" class="next-themes">
+最后进入，themes/next文件夹找到主题配置文件_config.yml，找到scheme settings设置next的样式，选择自己喜欢的：
+<img src="/create-this-blog-images/schemesetting.jpg" class="schemesetting">
+next主题有三种样式，可以自行选择喜欢的（#是注释符），选好后再次部署网站（修改文章等会自动实施修改，但是主题等需要重新生成）,hexo g,hexo d 查看效果即可。
+
+
+
+</li>
       
     </div>
     
@@ -318,7 +410,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag"># 学习</a>
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
           
         </div>
       
@@ -391,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -409,21 +510,12 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">categories</span>
-                
-              </div>
             
 
             
@@ -431,7 +523,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -455,6 +547,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Preface:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">搭建步骤:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.4.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.5.</span> <span class="nav-text">绑定GitHub,网站推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.6.</span> <span class="nav-text">个性化配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
