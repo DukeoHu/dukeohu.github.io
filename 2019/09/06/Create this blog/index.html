@@ -87,18 +87,12 @@
 <meta property="og:site_name" content="DH&#39;s Blog">
 <meta property="og:description" content="GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/dukeohu.github.io.jpg">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/ssh.jpg">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/ssh-github.jpg">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/npm-v.jpg">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/deploy.jpg">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/next.jpg">
-<meta property="og:image" content="http://yoursite.com/create-this-blog-images/schemesetting.jpg">
-<meta property="og:updated_time" content="2019-09-08T02:51:58.380Z">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg">
+<meta property="og:updated_time" content="2019-09-08T03:14:22.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Note of Building Blog">
 <meta name="twitter:description" content="GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。">
-<meta name="twitter:image" content="http://yoursite.com/create-this-blog-images/dukeohu.github.io.jpg">
+<meta name="twitter:image" content="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg">
 
 
 
@@ -306,6 +300,20 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg" rel="gallery_ck0f0jxzw0001nwus7fmounco" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         <p>GitHub+Hexo的方式可以避免网站备案，节省购买云主机和服务器的开支，实在是部署上线自己博客的最佳方式。</p>
@@ -314,10 +322,10 @@
 
 <blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
 <footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
-<h2>Preface:</h2><br>
+<h3>Preface:</h3><br>
 &emsp;搭建的过程并非一帆风顺，而这些总是要自己做过了才会知道。站着说话相比是十分轻松的，弯着腰做事的才会体会得到你未曾经历的滋味。
 <br>
-<h2>搭建步骤:</h2>
+<h3>搭建步骤:</h3>
 <li>GitHub创建仓库
 </li><li>安装Git
 </li><li>安装Node.js
@@ -390,8 +398,30 @@ hexo server -i IP地址  ---自定义IP<br>
 最后进入，themes/next文件夹找到主题配置文件_config.yml，找到scheme settings设置next的样式，选择自己喜欢的：
 <img src="/create-this-blog-images/schemesetting.jpg" class="schemesetting">
 next主题有三种样式，可以自行选择喜欢的（#是注释符），选好后再次部署网站（修改文章等会自动实施修改，但是主题等需要重新生成）,hexo g,hexo d 查看效果即可。
+<br>
 
 
+<h4>发表文章</h4>
+经过以上的配置后，基本上就可以开始你的写作之旅了。如果还需要更加详细的Hexo使用方法，可以到:
+<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">详细文档|Hexo</a>进行深入学习。
+<br>
+Hexo支持使用Markdown语法进行博客文章撰写，所以推荐先下载一个MarkDown编辑器：<a href="http://www.markdownpad.com/" target="_blank" rel="noopener">MarkdownPad</a>使用免费版，个人就足够使用了。<br>
+安装完成后，我就可以使用这个编辑器进行语法学习了，具体语法参考：
+<a href="http://www.markdown.cn/" target="_blank" rel="noopener">MarkDown语法学习</a>。
+<br>
+这种方法最大的好处就是可以实时预览自己的文章样式，十分便利。
+<br>
+通过以上的学习，我们就可以利用hexo书写自己的文章了。
+<br>
+首先开始发布上线博客文章,在CMD命令行中进入blog博客目录下输入：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;博客文章名字&quot;</span><br></pre></td></tr></table></figure>
+此时在blog目录下你会发现source文件夹的_post文件夹中出现了文章名字.md文件，使用之前下载的MarkDown编辑器打开，就可以开始书写你的博文了。<br>
+写好文章后，想要本地预览一下，在博客blog目录下输入hexo s即可本地查看，确认无误后使用hexo d部署至你的github仓库，就可以网络访问你写的博文了。
+<br>
+
+<h3>致谢</h3>
+说实话第一次搭建博客这么快就上线了，并写下记录搭建过程的博文，我用了三天。没有网络上众多大佬的帮助是不可能这么迅速的。搭建过程更加详细的步骤可以看看一个大佬的知乎文章:
+<a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">GitHub+Hexo 搭建个人网站详细教程</a>。
 
 </li>
       
@@ -510,7 +540,7 @@ next主题有三种样式，可以自行选择喜欢的（#是注释符），选
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -523,7 +553,7 @@ next主题有三种样式，可以自行选择喜欢的（#是注释符），选
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -557,7 +587,7 @@ next主题有三种样式，可以自行选择喜欢的（#是注释符），选
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Preface:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">搭建步骤:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.4.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.5.</span> <span class="nav-text">绑定GitHub,网站推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.6.</span> <span class="nav-text">个性化配置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Preface:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">搭建步骤:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">GitHub创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">7.</span> <span class="nav-text">绑定GitHub,网站推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">8.</span> <span class="nav-text">个性化配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">8.1.</span> <span class="nav-text">发表文章</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">9.</span> <span class="nav-text">致谢</span></a></li></ol></div>
             
 
           </div>
