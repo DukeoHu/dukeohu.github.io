@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="aix,syslog,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="偶然间遇到IBM的AIX系统，需要将Apache的日志进行转发到远端服务器上，网上都没有找到相关的资料，把自己解决问题的方法记录下来。吐槽一句：IBM的AIX系统果然是名不虚传的难用！！">
+<meta name="keywords" content="aix,syslog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Aix-Apache-syslog客户端配置">
+<meta property="og:url" content="http://yoursite.com/2019/09/19/aix-syslog/index.html">
+<meta property="og:site_name" content="DH&#39;s Blog">
+<meta property="og:description" content="偶然间遇到IBM的AIX系统，需要将Apache的日志进行转发到远端服务器上，网上都没有找到相关的资料，把自己解决问题的方法记录下来。吐槽一句：IBM的AIX系统果然是名不虚传的难用！！">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://cdn.pixabay.com/photo/2019/09/11/19/59/adler-4469768_1280.jpg">
+<meta property="og:updated_time" content="2019-09-19T03:23:36.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Aix-Apache-syslog客户端配置">
+<meta name="twitter:description" content="偶然间遇到IBM的AIX系统，需要将Apache的日志进行转发到远端服务器上，网上都没有找到相关的资料，把自己解决问题的方法记录下来。吐槽一句：IBM的AIX系统果然是名不虚传的难用！！">
+<meta name="twitter:image" content="https://cdn.pixabay.com/photo/2019/09/11/19/59/adler-4469768_1280.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/19/aix-syslog/">
+
+
+
+
+
+  <title>Aix-Apache-syslog客户端配置 | DH's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DH's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello,World.Hello,You!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/aix-syslog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DukeoHu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DH's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Aix-Apache-syslog客户端配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-19T09:59:58+08:00">
+                2019-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://cdn.pixabay.com/photo/2019/09/11/19/59/adler-4469768_1280.jpg" rel="gallery_ck0q3azh200015susagzanp2g" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://cdn.pixabay.com/photo/2019/09/11/19/59/adler-4469768_1280.jpg" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>偶然间遇到IBM的AIX系统，需要将Apache的日志进行转发到远端服务器上，网上都没有找到相关的资料，把自己解决问题的方法记录下来。吐槽一句：IBM的AIX系统果然是名不虚传的难用！！</p>
+<a id="more"></a>
+
+<h2>1.syslog简介</h2>
+<p>
+在Unix类操作系统上，syslog广泛应用于系统日志。syslog日志消息既可以记录在本地文件中，也可以通过网络发送到接收syslog的服务器。接收syslog的服务器可以对多个设备的syslog消息进行统一的存储，或者解析其中的内容做相应的处理。常见的应用场景是网络管理工具、安全管理系统、日志审计系统。
+<br>
+详细介绍可以看看这个：<a href="https://blog.csdn.net/zhezhebie/article/details/75222667" target="_blank" rel="noopener">Syslog详解</a>
+</p>
+
+<h2>2.syslog配置</h2>
+<p>AIX系统使用的是syslog而非rsyslog，所以配置文件也变成了/etc/syslog.conf。
+<br>
+首先使用vi编辑器对syslog.conf文件进行编辑
+<br>
+编辑并启用以下部分配置内容:
+<br>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.emerg;*.alert;*.crit;*.err;*.warning;*.notice;*.info;*.debug &lt;tab-separation&gt;@IP</span><br></pre></td></tr></table></figure>
+需要注意的是在AIX系统中使用TAB进行分割！
+<br>
+</p>
+
+<p>修改完以后，保存退出。还需要重启syslog服务，以应用新配置
+在aix系统中使用的是子系统的概念，而非服务。所以什么systemctl，service之类的命令都是没有的。
+<br>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stopsrc -s syslogd</span><br><span class="line">startsrc -s syslogd</span><br></pre></td></tr></table></figure>
+重启服务后可以在远端服务器上抓包看一看有没有日志过来，一般来说我们syslog配置的是采集所有日志，所以肯定会有日志过来的。
+<br>
+在远端接受日志的服务器上使用tcpdump进行抓包:
+<br>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 port 514 and src 发送端IP</span><br></pre></td></tr></table></figure>
+<br>
+eth0是你接受日志的那张网卡，514端口是syslog的服务端端口，src制定发送端的IP，就可以看到收到的日志了，如果想要存储下来可以使用-w参数进行存储，命令使用如下：
+<br>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -w 文件名 -i eth0 port 514 and src 发送端IP</span><br></pre></td></tr></table></figure>
+
+</p>
+
+<h2>3.logger简介</h2>
+<p>
+logger是一个shell命令接口，可以通过该接口使用Syslog的系统日志模块，还可以从命令行直接向系统日志文件写入一行信息。
+<br>
+</p><h4>实例：</h4>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ logger System Rebooted <span class="comment">#往系统日志例程中写入“System Rebooted”可在/var/log/syslog中查看</span></span><br><span class="line">写入到指定的<span class="built_in">log</span>文件中。</span><br><span class="line"></span><br><span class="line">$ vim /etc/rsyslog.conf <span class="comment">#在最后一行加入local3.* /var/log/my_test.log 意思是来自local3的所有消息都记录到/var/log/my_test.log中。</span></span><br><span class="line"></span><br><span class="line">$ service rsyslog restart <span class="comment">#重启rsyslog服务</span></span><br><span class="line"></span><br><span class="line">$ logger -i -t <span class="string">"my_test"</span> -p local3.notice <span class="string">"test_info"</span></span><br><span class="line"></span><br><span class="line">$ cat /var/<span class="built_in">log</span>/my_test.log</span><br><span class="line">May 5 21:27:37 gino-virtual-machine my_test[3651]: test_info</span><br><span class="line"></span><br><span class="line">-i 在每行都记录进程ID</span><br><span class="line">-t my_test每行记录都加上“my_test”这个标签</span><br><span class="line">-p local3.notice 设置记录的设备和级别</span><br><span class="line"><span class="string">"test_info"</span> 输出信息</span><br></pre></td></tr></table></figure>
+
+
+<p></p>
+
+<h2>4.apache日志接入</h2>
+接入apache日志时，最好还是设置apache单个日志文件，这样要简单很多，否则的话就需要用我写的shell脚本了...
+<br>
+<h4>单日志</h4>
+一句话就可以搞定：
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup tail -f apache日志路径 | logger -t apache -p local4.info&amp;</span><br></pre></td></tr></table></figure>
+
+<p>如果是单日志的下面的就可以不用看了……</p>
+<h4>多日志：每天都会按日期生成日志</h4>
+
+<p>在日志目录下执行：vi apache_sys.sh<br>内容如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.~/.profile</span><br><span class="line"><span class="meta">#!/bin/ksh</span></span><br><span class="line">proc=$(ps -ef | grep <span class="string">"logger -p"</span> | grep -v grep | awk <span class="string">'&#123;print $2&#125;'</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$proc</span></span><br><span class="line"><span class="built_in">kill</span> -9 <span class="variable">$&#123;proc&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"kill success"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"start new proc"</span></span><br><span class="line">filename=/ptc/Apache/logs/access_log_$(date +%Y-%m-%d)_00_00_00</span><br><span class="line">nohup tail -f <span class="variable">$filename</span> | logger -p local4.info&amp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>aix默认使用的是KornShell（KSH）所以改为了/bin/ksh。其次，第一行加了一个.~/.profile是因为在AIX中如果要使用crontab定时执行脚本需要在脚本中加入这一句。<br><br><br>脚本写好以后，就可以设置定时启动脚本了</p>
+<h2>5.设置定时任务</h2>
+设置定时任务是为apache日志按天生成而写的脚本服务的。
+1.编辑定时任务
+crontab -e
+此时会进入一个编辑页面，语法就是vi编辑器的语法。
+
+<p>2.定时任务设置：<br>添加一句：<br>01 00 * * * sh /xx/xx/apache_syslog.sh<br>–每天一点定时执行脚本<br>3.查看是否设置成功<br>crontab -l</p>
+<p>4.查看标准输出和错误信息：<br>cat /var/spool/mail下的与用户名同名文件中查看错误信息</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/aix/" rel="tag"># aix</a>
+          
+            <a href="/tags/syslog/" rel="tag"># syslog</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/11/analysis-vulnerability/" rel="next" title="analysis vulnerability">
+                <i class="fa fa-chevron-left"></i> analysis vulnerability
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg" alt="DukeoHu">
+            
+              <p class="site-author-name" itemprop="name">DukeoHu</p>
+              <p class="site-description motion-element" itemprop="description">Lifelong Learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+<br>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29966565&auto=0&height=66"></iframe>
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">1.syslog简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">2.syslog配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">3.logger简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.0.1.</span> <span class="nav-text">实例：</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">4.apache日志接入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">4.0.1.</span> <span class="nav-text">单日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">4.0.2.</span> <span class="nav-text">多日志：每天都会按日期生成日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">5.设置定时任务</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DukeoHu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
