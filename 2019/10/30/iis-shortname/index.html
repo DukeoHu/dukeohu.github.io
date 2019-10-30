@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, Everyone">
+  <meta name="keywords" content="Learning,Vul,">
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="Lifelong Learning">
-<meta name="keywords" content="Notes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="DH&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Learning/index.html">
+<meta name="description" content="为了兼容16位MS-DOS程序，Windows为文件名较长的文件和文件夹生成了对应的Windows8.3短文件名。">
+<meta name="keywords" content="Learning,Vul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IIS短文件名泄露漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/iis-shortname/index.html">
 <meta property="og:site_name" content="DH&#39;s Blog">
-<meta property="og:description" content="Lifelong Learning">
+<meta property="og:description" content="为了兼容16位MS-DOS程序，Windows为文件名较长的文件和文件夹生成了对应的Windows8.3短文件名。">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg">
+<meta property="og:updated_time" content="2019-10-30T07:53:39.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DH&#39;s Blog">
-<meta name="twitter:description" content="Lifelong Learning">
+<meta name="twitter:title" content="IIS短文件名泄露漏洞">
+<meta name="twitter:description" content="为了兼容16位MS-DOS程序，Windows为文件名较长的文件和文件夹生成了对应的Windows8.3短文件名。">
+<meta name="twitter:image" content="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Learning/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/30/iis-shortname/">
 
 
 
 
 
-  <title>Tag: Learning | DH's Blog</title>
+  <title>IIS短文件名泄露漏洞 | DH's Blog</title>
   
 
 
@@ -144,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,208 +241,203 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Learning<small>Tag</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/30/iis-shortname/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DukeoHu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DH's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/10/30/Sec-Tools/" itemprop="url">
-              
-                <span itemprop="name">Sec-Tools</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">IIS短文件名泄露漏洞</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-30T16:28:25+08:00" content="2019-10-30">
-          10-30
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-30T15:43:34+08:00">
+                2019-10-30
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg" rel="gallery_ck2d0ud73000ai4u90m7drnbr" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://cdn.pixabay.com/photo/2016/04/22/08/38/worm-1345354_960_720.jpg" itemprop="contentUrl">
+              </a>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/30/reflect-shell/" itemprop="url">
-              
-                <span itemprop="name">反弹SHELL</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-30T15:59:08+08:00" content="2019-10-30">
-          10-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+          
+          </div>
+        </div>
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/30/iis-shortname/" itemprop="url">
-              
-                <span itemprop="name">IIS短文件名泄露漏洞</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-30T15:43:34+08:00" content="2019-10-30">
-          10-30
-        </time>
-      </div>
-
-    </header>
-  </article>
+        <p>为了兼容16位MS-DOS程序，Windows为文件名较长的文件和文件夹生成了对应的Windows8.3短文件名。</p>
+<a id="more"></a>
 
 
-      
-        
+<h2>IIS短文件名泄露漏洞</h2>
+<h3>成因：</h3>
+为了兼容16位MS-DOS程序，Windows为文件名较长的文件和文件夹生成了对应的Windows8.3短文件名。
+window中使用dir /x可以查看短文件名
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<h3>短文件特征：</h3>
+只有前六位字符直接显示，后续 字符用~1指代。数字可以递增
+后缀名最长只有3位，多余的被截断
+启用.net的IIS下暴力列举短文件名：访问存在的短文件名会返回404，访问不存在的短文件名会返回400
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/30/PHP/" itemprop="url">
-              
-                <span itemprop="name">PHP Learning Notes</span>
-              
-            </a>
-        
-      </h2>
+<h3>利用方法：</h3>
+<img src="/vul/iis-shortname.png" class="img" width="500" height="200">
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-30T15:31:48+08:00" content="2019-10-30">
-          10-30
-        </time>
-      </div>
+<h3>漏洞价值：</h3>
+猜解后台地址，敏感文件，某些情况下可以哦通过短文件名web直接下载对应的文件
 
-    </header>
-  </article>
+<h3>利用条件：</h3>
+满足IIS和.net环境
+只能猜解前六位，以及扩展名3位
+名称较短的文件没有短文件名
 
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/11/analysis-vulnerability/" itemprop="url">
-              
-                <span itemprop="name">PHP伪协议学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-11T14:38:36+08:00" content="2019-09-11">
-          09-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/07/Hexo-grammar-Learning/" itemprop="url">
-              
-                <span itemprop="name">Hexo grammar Learning</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-07T23:06:32+08:00" content="2019-09-07">
-          09-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/09/06/Create this blog/" itemprop="url">
-              
-                <span itemprop="name">The Note of Building Blog</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-06T10:18:44+08:00" content="2019-09-06">
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<h3>修复：</h3>
+方法一
+<br>
+---注册表：HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem
+<br>
+修改NtfsDisable8dot3NameCreation值为1（重启后生效）
+<br>
+方法二---：
+<br>
+fsutil 8dot3name query (server 2008)
+<br>
+fsutil behavior set disable8dot3 1（server 2003）
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
+          
+            <a href="/tags/Vul/" rel="tag"># Vul</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/30/PHP/" rel="next" title="PHP Learning Notes">
+                <i class="fa fa-chevron-left"></i> PHP Learning Notes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/30/reflect-shell/" rel="prev" title="反弹SHELL">
+                反弹SHELL <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -447,6 +445,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -467,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -522,6 +533,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">IIS短文件名泄露漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">成因：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">短文件特征：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.3.</span> <span class="nav-text">利用方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.4.</span> <span class="nav-text">漏洞价值：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.5.</span> <span class="nav-text">利用条件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.6.</span> <span class="nav-text">修复：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -663,6 +690,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
