@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="DH&#39;s Blog">
 <meta property="og:description" content="CTF超级简单入门学习笔记，主要是防止忘记和加深巩固使用的。。。。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg">
-<meta property="og:updated_time" content="2019-12-19T02:43:06.128Z">
+<meta property="og:image" content="https://cdn.pixabay.com/photo/2020/06/05/10/51/aurora-butterfly-5262759__340.jpg">
+<meta property="og:updated_time" content="2020-06-10T08:52:46.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CTF-1">
 <meta name="twitter:description" content="CTF超级简单入门学习笔记，主要是防止忘记和加深巩固使用的。。。。">
-<meta name="twitter:image" content="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg">
+<meta name="twitter:image" content="https://cdn.pixabay.com/photo/2020/06/05/10/51/aurora-butterfly-5262759__340.jpg">
 
 
 
@@ -324,8 +324,8 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg" rel="gallery_ck4c4enxo0000a4u91dos5334" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://pic2.zhimg.com/v2-d4c1239e75c02e8482c22017a6c8d407_1200x500.jpg" itemprop="contentUrl">
+              <a class="post-gallery-img fancybox" href="https://cdn.pixabay.com/photo/2020/06/05/10/51/aurora-butterfly-5262759__340.jpg" rel="gallery_ckb9ct5wk0001mouigjlss9l3" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://cdn.pixabay.com/photo/2020/06/05/10/51/aurora-butterfly-5262759__340.jpg" itemprop="contentUrl">
               </a>
             
           
@@ -338,6 +338,8 @@
       
         <p>CTF超级简单入门学习笔记，主要是防止忘记和加深巩固使用的。。。。</p>
 <a id="more"></a>
+<h2>入门篇-等级1</h2>
+
 <h3>1.Get Source</h3>
     &emsp;考察点：右键查看源代码，会隐藏一些被注释的内容。<br>
 
@@ -348,14 +350,107 @@
     &emsp;考察点：凯撒加密--将字母向前或向后按照字母表中顺序移动相同个字符数。<br>
     &emsp;工具：https://github.com/DukeoHu/CTF-program/blob/master/Caesar%20Crypto<br>
 
-<h3>3.ASCII</h3>
+<h3>4.ASCII</h3>
     &emsp;考察点：ASCII码：将字母和常用字符进行编码的方式<br>
     &emsp;工具：https://github.com/DukeoHu/CTF-program/blob/master/Ascii%20Decode<br>
 
 
-<h3>3.URL Encode</h3>
+<h3>5.URL Encode</h3>
     &emsp;考察点：URL编码-将非英文字母的字符转换为ASCII码后再用16进制进行编码，使用%进行分割的编码方式<br>
     &emsp;工具：https://github.com/DukeoHu/CTF-program/blob/master/URL_DECODE<br>
+
+<h2>入门篇-等级2</h2>
+
+<h3>1.Primes</h3>
+    &emsp;考察点：素数-只能被1和自身整除的数<br>
+    &emsp;思路：如果数m不能被2~根号m间任一整数整除，则m必定为素数<br>
+    &emsp;工具：https://github.com/DukeoHu/CTF-program/blob/master/Primes<br>
+
+<h3>2.Encoding</h3>
+    &emsp;考察点：二进制转ASCII<br>
+    &emsp;思路：注意先查看二进制数组可以被什么数整除，因为有些不是按照8个二进制数划分的<br>
+    &emsp;工具：https://github.com/DukeoHu/CTF-program/blob/master/Primes<br>
+
+<h3>3.PHP LFI</h3>
+    &emsp;考察点：PHP本地文件包含<br>
+    &emsp;思路：%00文件名截断<br>
+    &emsp;答案：https://www.wechall.net/challenge/training/php/lfi/up/index.php?file=../../solution.php%00<br>
+
+<h3>4.PHP 0817</h3>
+    &emsp;考察点：PHP本地文件包含<br>
+    &emsp;思路：switch的每一个case代码段里面都必须要设置break语句，否则会顺序向下执行每一个case代码段<br>
+    &emsp;答案：https://www.wechall.net/challenge/php0817/index.php?which=solution<br>
+
+<h3>5.Crypto Transpositions I </h3>
+    &emsp;考察点：矩阵变换密码--将待加密文本写成矩阵的形式，然后打乱列的顺序即得到密文<br>
+    &emsp;思路：将密文按照矩阵形式（注意调整矩阵的列数）写出，然后从左至右，从上至下进行读写<br>
+    &emsp;答案：写成N*2矩阵形式，再读出<br>    
+
+<h3>6.Crypto Substitution I </h3>
+    &emsp;考察点：古典置换加密<br>
+    &emsp;思路：词频分析方式，根据<br>
+    &emsp;答案：www.puipui.com词频分析网站<br>
+
+<h3>7.Crypto Caesar II </h3>
+    &emsp;考察点：凯撒加密<br>
+    &emsp;思路：将16进制转换为10进制，再将该值不断加1直至128后，将该数字转换为ASCII值<br>
+    &emsp;工具：<br>
+
+<h3>8.Training: Crypto - Digraphs </h3>
+    &emsp;考察点：有向图加密<br>
+    &emsp;思路：将一个字符映射为两个字符，猜测第一个密文段表示Congratulation，然后找出其对应关系，不断猜测密文代表的含义，直至找出结果。<br>
+    &emsp;工具：https://github.com/DukeoHu/CTF-program/blob/master/Digraph-Crypto.py<br>
+
+<h3>9.Training: MySQL I </h3>
+    &emsp;考察点：MYSQL万能密钥<br>
+    &emsp;思路：查看SQL语句为：$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";   未进行过滤，发现可以使用省略号进行万能密钥尝试。<br>
+    &emsp;使用单引号进行闭合，再配合--省略号发现不行，换成#进行省略成功。答案：admin' #<br>
+
+<h3>10.Training: MySQL II </h3>
+    &emsp;考察点：SQL绕过<br>
+    &emsp;思路：查看源代码发现username和password采用分开验证的方式：先查询username是否存在，再查询该username对应的密码MD5值是否和我们输入的密码MD5值对应<br>
+    &emsp;因此，我们需要使用union构造已知MD5值来进行查询，答案：123' union select 1,'admin',md5('password');#<br>
+    &emsp;详细思路：username一栏填写123' union select 1,'admin',md5('password');#      密码一栏填password
+
+<pre><code>构成sql语句：
+
+SELECT * FROM users WHERE username=&apos;123&apos; union select 1,&apos;admin&apos;,md5(&apos;password&apos;);#&apos;
+由于最后有个注释符号，所以相当于：
+
+SELECT * FROM users WHERE username=&apos;123&apos; union select 1,&apos;admin&apos;,md5(&apos;password&apos;);
+这句话首先通过username=123将原语句报错。因此返回的将会是第二条语句产生的信息。
+
+而我们union select的是直接构造了用户名为admin，密码为password的md5值。这样就可以让程序误认为我们构造的信息就是它从数据库里面提取得到的信息。
+
+验证密码正确是通过判断： $result[&apos;password&apos;] 和 $password 是否一致。
+
+$result[&apos;password&apos;]是用union构造的，因此password一栏填写password即可登录成功。&lt;br&gt;</code></pre><h3>11.Training: Register Globals </h3>
+    &emsp;考察点：PHP参数register_globals<br>
+    &emsp;思路：PHP参数register_globals开启时，会将用户提交的GET，POST参数注册成全局变量并初始化为参数的值。<br>
+    &emsp; send request?存在两个if判断，第一个用于判断能否登录成功，第二个用于返回登录状态和userid。根据题目可知存在register_globals，所以我们直接使用GET传参数，不经过第一个if判断直接传递login[0]=admin进行绕过。#<br>
+    &emsp;答案：www.wechall.net/challenge/training/php/globals/globals.php?login[0]=admin。<br>
+
+<h3>12.Training: LSB </h3>
+    &emsp;考察点：隐写术<br>
+    &emsp;思路：LSB最低有效位(Least Significant Bits)。<br>
+    &emsp; PNG和BMP图片采用无损压缩可以用于隐藏信息，JPG图片采用有损压缩无法进行LSB信息隐藏。RGB中，每一个颜色由8bit组成，仅仅变更低比特位不会对图像影响太大。#<br>
+    &emsp;RGB-三通道：Red，Green，Blue。<br>
+    &emsp;工具：stegasolove<br>
+
+<h3>13.Limited Access </h3>
+    &emsp;考察点：.htaccess<br>
+    &emsp;.htaccess分布式配置文件-Apache配置文件，负责相关目录下网页配置（修改httpd.conf,启用其中的AllowOverride已开启该配置文件）。可以实现302重定向，自定义404错误页面，改变文件扩展名，允许/阻止特定用户访问，禁止目录列表，配置默认文档<br>
+    &emsp; 功能：文件夹密码保护，用户自动重定向，自定义错误页面，改变文件扩展名，封禁特定IP，使用其他文件作为index文件#<br>
+    &emsp;适用场合：内容提供者需要针对特定目录改变服务器的配置而又没有root权限的情况下。<br>
+    &emsp;答案：只对GET方式进行限制，使用POST方式代替<br>
+
+<h3>14.Repeating History </h3>
+    &emsp;考察点：大量文件中查找隐藏信息的能力<br>
+    &emsp;github相关页面下查找信息，第一部分比较明显，第二部分需要查看history提交信息找到明文信息<br>
+
+<h3>15.PHP myadmin </h3>
+    &emsp;考察点：phpmyadmin常见的路径和缩写<br>
+    &emsp;答案：pma.wechall.net<br>
       
     </div>
     
@@ -385,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/30/Sec-Tools/" rel="next" title="Sec-Tools">
-                <i class="fa fa-chevron-left"></i> Sec-Tools
+              <a href="/2019/12/15/serialize/" rel="next" title="序列化及其反序列化">
+                <i class="fa fa-chevron-left"></i> 序列化及其反序列化
               </a>
             
           </div>
@@ -394,6 +489,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/05/dynamic/" rel="prev" title="PHPStorm+Xdebug动态调试环境搭建">
+                PHPStorm+Xdebug动态调试环境搭建 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -472,7 +571,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -485,7 +584,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -519,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">1.Get Source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">2.Stegano I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">3.Caesar Crypto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">3.ASCII</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">3.URL Encode</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">入门篇-等级1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">1.Get Source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">2.Stegano I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.3.</span> <span class="nav-text">3.Caesar Crypto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.4.</span> <span class="nav-text">4.ASCII</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.5.</span> <span class="nav-text">5.URL Encode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">入门篇-等级2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">1.Primes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">2.Encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">3.PHP LFI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.4.</span> <span class="nav-text">4.PHP 0817</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.5.</span> <span class="nav-text">5.Crypto Transpositions I </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.6.</span> <span class="nav-text">6.Crypto Substitution I </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.7.</span> <span class="nav-text">7.Crypto Caesar II </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.8.</span> <span class="nav-text">8.Training: Crypto - Digraphs </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.9.</span> <span class="nav-text">9.Training: MySQL I </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.10.</span> <span class="nav-text">10.Training: MySQL II </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.11.</span> <span class="nav-text">11.Training: Register Globals </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.12.</span> <span class="nav-text">12.Training: LSB </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.13.</span> <span class="nav-text">13.Limited Access </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.14.</span> <span class="nav-text">14.Repeating History </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.15.</span> <span class="nav-text">15.PHP myadmin </span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -539,7 +638,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
