@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Learning,ELK,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。">
+<meta name="keywords" content="Learning,ELK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ELK学习-3】-ElasticSearch基础(1)">
+<meta property="og:url" content="http://yoursite.com/2020/05/15/es-study/index.html">
+<meta property="og:site_name" content="DH&#39;s Blog">
+<meta property="og:description" content="ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
+<meta property="og:updated_time" content="2020-07-02T05:12:31.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ELK学习-3】-ElasticSearch基础(1)">
+<meta name="twitter:description" content="ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/15/es-study/">
+
+
+
+
+
+  <title>【ELK学习-3】-ElasticSearch基础(1) | DH's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DH's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello,World.Hello,You!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/es-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DukeoHu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DH's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【ELK学习-3】-ElasticSearch基础(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-15T19:04:35+08:00">
+                2020-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" rel="gallery_ckc4f8qyi000mh0uii2276v4m" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。</p>
+<a id="more"></a>
+
+<h3>简介</h3>
+<p>一个分布式的实时文档存储，每个字段可以被索引与搜索；
+一个分布式实时分析搜索引擎；
+能胜任上百个服务节点的扩展，并支持 PB 级别的结构化或者非结构化数据</p>
+
+<p>以下命令均在ES7.7.0版本下执行。</p>
+<h3>基本概念</h3>
+<h4>全文搜索</h4>
+<p>全文搜索是指计算机索引程序通过扫描文章中的每一个词，对每一个词建立一个索引，指明该词在文章中出现的次数和位置。用户通过关键词进行搜索时，检索程序返回所有匹配结果。</p>
+
+<h4>倒排索引</h4>
+<p>根据文档内容进行分词，然后映射存在词的文档编号。而正向索引是通过为文档编号建立索引，然后通过编号查找文档内容。</p>
+
+<h4>节点&集群</h4>
+<p>ES本质为一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个ES实例。单个ES实例被称为一个节点(Node)，一组节点构成一个集群(Cluster)。</p>
+
+<h4>索引(Index)</h4>
+<p>ES数据管理的顶层单位，相当于关系型数据库中的数据库。</p>
+
+<h4>文档(Document)</h4>
+<p>索引(index)里面的单条记录被称为文档，多个文档构成索引。文档使用JSON格式标识，同一个Index里的文档结构最好保持相同，便于提供搜索效率。</p>
+
+<h4>类型(Type)</h4>
+<p>文档可以分组，如employee这个索引里面的文档可以按照部门分组，也可以按照职级分组。是一种虚拟的逻辑分组，用于过滤文档。类似于数据库中的表，不同的类型应该有相似的结构，完全不同的数据应该存为两个索引，而不是同一个索引里面的两个类型(虽然可以做到)--效率低</p>
+
+<h4>文档元数据(Document Metadata)</h4>
+<p>文档元数据有3个，分别为_index，_type，_id。用于唯一表示一个文档，其中_index标识文档存放在那个索引，_type标识文档的逻辑分组，_id为文档的唯一标识。</p>
+
+<h4>字段(Fields)</h4>
+<p>每个文档都类似于JSON格式，包含了许多字段，每个字段都有对应的值，多个字段组成了一个文档。类似于数据库数据表中的字段。</p>
+
+<h3>基本操作-增删改查</h3>
+<h4>创建，添加</h4>
+<h5>创建索引index</h5>
+<img src="/ES/1.png" class="img" width="500" height="200">
+
+<h5>添加文档document</h5>
+<img src="/ES/2.png" class="img" width="500" height="200">
+
+<h4>删除</h4>
+<h5>删除索引index</h5>
+删除类型Type也可以使用该方法。
+<img src="/ES/3.png" class="img" width="500" height="200">
+
+<h5>删除文档document</h5>
+<img src="/ES/4.png" class="img" width="500" height="200">
+
+<h4>更改</h4>
+<h5>覆盖更新</h5>
+<img src="/ES/5.png" class="img" width="500" height="200">
+
+<h5>局部更新</h5>
+<img src="/ES/6.png" class="img" width="500" height="200">
+
+
+<h4>查询</h4>
+<h5>单个文档查询</h5>
+<img src="/ES/7.png" class="img" width="500" height="200">
+
+<h5>同类型文档查询</h5>
+<img src="/ES/8.png" class="img" width="500" height="200">
+
+<h5>根据字段查询</h5>
+<img src="/ES/9.png" class="img" width="500" height="200">
+
+
+<h5>DSL查询</h5>
+<img src="/ES/10.png" class="img" width="500" height="200">
+
+<h5>根据条件查询</h5>
+<img src="/ES/11.png" class="img" width="500" height="200">
+
+
+<h5>高亮显示</h5>
+<img src="/ES/12.png" class="img" width="500" height="200">
+
+
+
+<h4>扩展命令</h4>
+<h5>a.查询URL后加?pretty参数便于查看</h5>
+
+<h5>b.选择字段显示，不返回全部信息</h5>
+<img src="/ES/13.png" class="img" width="500" height="200">
+
+<h5>c.判断文档是否存在-HEAD方法</h5>
+<img src="/ES/14.png" class="img" width="500" height="200">
+
+<h5>d.批量查询-mget方法</h5>
+<img src="/ES/15.png" class="img" width="500" height="200">
+
+
+<h5>e.批量插入-bulk方法(该方法可用于批量插入，删除，变更操作)</h5>
+<img src="/ES/16.png" class="img" width="500" height="200">
+<img src="/ES/17.png" class="img" width="500" height="200">
+
+<h5>f.分页</h5>
+指定每页显示的结果数以及需要跳过的条数。
+<img src="/ES/18.png" class="img" width="500" height="200">
+
+<h5>g.term查询</h5>
+用于精确匹配值，如数字，日期，布尔值等。
+<img src="/ES/19.png" class="img" width="500" height="200">
+
+<h5>h.terms查询</h5>
+与term类似，可以匹配多个条件。
+<img src="/ES/20.png" class="img" width="500" height="200">
+
+<h5>i.range查询</h5>
+按照指定范围查找数据。
+<img src="/ES/21.png" class="img" width="500" height="200">
+
+<h5>j.exists查询</h5>
+查找文档中是否包含指定字段或者没有某个字段，类似于IS_NULL条件。
+<img src="/ES/22.png" class="img" width="500" height="200">
+
+<h5>k.match查询</h5>
+标志查询。如果使用match查询全文本text类字段，在查询之前会对查询条件进行分词；如果查询确切值将会直接以查询值为条件进行查询。
+<img src="/ES/23.png" class="img" width="500" height="200">
+
+<h5>l.bool查询</h5>
+布尔查询用于合并多个条件查询结果的布尔逻辑，包含以下操作符：<br>
+must:   多个查询条件完全匹配，相当于 and
+must_not:   多个查询条件相反匹配，相当于 not
+should:  至少有一个条件匹配，相当于 or
+<img src="/ES/24.png" class="img" width="500" height="200">
+
+<h5>m.filter过滤查询</h5>
+
+<img src="/ES/25.png" class="img" width="500" height="200">
+
+
+<h3>分词及搜索</h3>
+相关性时评价查询于其结果间的相关程度，并根据相关程度对结果进行排名的一种方法。
+分词的目的在于创建倒排索引
+<h5>创建索引，并设置索引的字段和映射方式</h5>
+<img src="/ES/26.png" class="img" width="500" height="200">
+
+<h5>批量插入数据</h5>
+<img src="/ES/27.png" class="img" width="500" height="200">
+
+
+<h5>单词搜索</h5>
+针对单词进行搜索时，查询字符串本身也会被分词，相关度评分_score是一种结合词频，出现的文档频率，字段长度进行计算的方式。
+<img src="/ES/28.png" class="img" width="500" height="200">
+
+<h5>多词搜索</h5>
+如果要想搜索包含“音乐”和足球的用户，就需要用operator指定其使用的逻辑关系或者minimun_should_match匹配度。
+<img src="/ES/29.png" class="img" width="500" height="200">
+<img src="/ES/30.png" class="img" width="500" height="200">
+
+<h5>组合搜索</h5>
+借助bool进行查询，其中must_not条件不影响评分，只是将不相干的文档排除；should的内容也不是必须匹配的。
+<img src="/ES/31.png" class="img" width="500" height="200">
+
+<h5>权重</h5>
+对于某些重要的词增加权重，影响其文档得分。
+<img src="/ES/32.png" class="img" width="500" height="200">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
+          
+            <a href="/tags/ELK/" rel="tag"># ELK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/13/elk-2/" rel="next" title="【ELK学习-2】-PacketBeat流量安装与采集">
+                <i class="fa fa-chevron-left"></i> 【ELK学习-2】-PacketBeat流量安装与采集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/16/es-study-2/" rel="prev" title="【ELK学习-3】-ElasticSearch基础(2)">
+                【ELK学习-3】-ElasticSearch基础(2) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg" alt="DukeoHu">
+            
+              <p class="site-author-name" itemprop="name">DukeoHu</p>
+              <p class="site-description motion-element" itemprop="description">Lifelong Learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+<br>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29966565&auto=0&height=66"></iframe>
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">全文搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">节点&amp;集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.4.</span> <span class="nav-text">索引(Index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.5.</span> <span class="nav-text">文档(Document)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.6.</span> <span class="nav-text">类型(Type)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.7.</span> <span class="nav-text">文档元数据(Document Metadata)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.8.</span> <span class="nav-text">字段(Fields)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">基本操作-增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.1.</span> <span class="nav-text">创建，添加</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.1.1.</span> <span class="nav-text">创建索引index</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.1.2.</span> <span class="nav-text">添加文档document</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.2.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.2.1.</span> <span class="nav-text">删除索引index</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.2.2.</span> <span class="nav-text">删除文档document</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.3.</span> <span class="nav-text">更改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.3.1.</span> <span class="nav-text">覆盖更新</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.3.2.</span> <span class="nav-text">局部更新</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.4.</span> <span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.4.1.</span> <span class="nav-text">单个文档查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.4.2.</span> <span class="nav-text">同类型文档查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.4.3.</span> <span class="nav-text">根据字段查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.4.4.</span> <span class="nav-text">DSL查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.4.5.</span> <span class="nav-text">根据条件查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.4.6.</span> <span class="nav-text">高亮显示</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.5.</span> <span class="nav-text">扩展命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.1.</span> <span class="nav-text">a.查询URL后加?pretty参数便于查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.2.</span> <span class="nav-text">b.选择字段显示，不返回全部信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.3.</span> <span class="nav-text">c.判断文档是否存在-HEAD方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.4.</span> <span class="nav-text">d.批量查询-mget方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.5.</span> <span class="nav-text">e.批量插入-bulk方法(该方法可用于批量插入，删除，变更操作)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.6.</span> <span class="nav-text">f.分页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.7.</span> <span class="nav-text">g.term查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.8.</span> <span class="nav-text">h.terms查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.9.</span> <span class="nav-text">i.range查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.10.</span> <span class="nav-text">j.exists查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.11.</span> <span class="nav-text">k.match查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.12.</span> <span class="nav-text">l.bool查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">3.5.13.</span> <span class="nav-text">m.filter过滤查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">分词及搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">4.0.1.</span> <span class="nav-text">创建索引，并设置索引的字段和映射方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">4.0.2.</span> <span class="nav-text">批量插入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">4.0.3.</span> <span class="nav-text">单词搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">4.0.4.</span> <span class="nav-text">多词搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">4.0.5.</span> <span class="nav-text">组合搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">4.0.6.</span> <span class="nav-text">权重</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DukeoHu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

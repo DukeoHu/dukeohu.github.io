@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Learning,ELK,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。">
+<meta name="keywords" content="Learning,ELK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【ELK学习-3】-ElasticSearch基础(2)">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/es-study-2/index.html">
+<meta property="og:site_name" content="DH&#39;s Blog">
+<meta property="og:description" content="ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
+<meta property="og:updated_time" content="2020-07-02T07:26:23.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【ELK学习-3】-ElasticSearch基础(2)">
+<meta name="twitter:description" content="ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/16/es-study-2/">
+
+
+
+
+
+  <title>【ELK学习-3】-ElasticSearch基础(2) | DH's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DH's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hello,World.Hello,You!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/es-study-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DukeoHu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DH's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【ELK学习-3】-ElasticSearch基础(2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T19:04:35+08:00">
+                2020-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" rel="gallery_ckc4f8qyg000kh0ui3khauuvm" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://upload-images.jianshu.io/upload_images/9419034-385d53f3d51e4d04.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>ElasticSearch是一个开源的分布式，RESTful风格的搜索和数据分析引擎。</p>
+<a id="more"></a>
+
+<h3>集群节点</h3>
+ES集群由多个节点node组成，通过cluster.name 设置集群名称以区别其它集群，每个节点通过node.name指定节点名称。
+<h4>4种节点</h4>
+master节点：
+配置文件中node.master属性为true就有资格被选为master节点。<br>
+用于控制整个集群，比如创建或删除索引，管理其它非master节点<br>
+
+<p>data节点：<br>配置文件中node.data属性为true就有资格被选为master节点。<br><br>data节点主要执行数据相关的操作，如文档的CRUD<br></p>
+<p>客户端节点:<br>配置文件中node.master属性和node.data属性均为false。<br><br>该节点不能作为master节点，也不能作为data节点。<br><br>主要用于响应客户的请求，把请求转发到其它节点。<br></p>
+<p>部落节点：<br>配置tribe.*时为一个特殊的客户端，可以连接到多个集群，在其上执行搜索和其它操作。<br></p>
+<h3>三节点集群搭建</h3>
+
+<figure class="highlight shell"><figcaption><span>集群配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">配置es的集群名称，默认是elasticsearch，</span></span><br><span class="line"><span class="meta">#</span><span class="bash">es会自动发现在同一网段下的es，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果在同一网段下有多个集群，就可以用这个属性来区分不同的集群。</span></span><br><span class="line">cluster.name: cell   ----集群名称</span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ------------------------------------ Node ------------------------------------</span></span><br><span class="line">node.name: node_01</span><br><span class="line">node.master: true ----配置是否有资格称为master节点，如果三个节点都配置为true就会通过选举选取master节点。</span><br><span class="line">node.data: true   ----配置是否为数据节点</span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Add custom attributes to the node:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">node.attr.rack: r1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ----------------------------------- Paths ------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Path to directory <span class="built_in">where</span> to store the data (separate multiple locations by comma):</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">path.data: /var/data/elasticsearch    ----数据存放路径</span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Path to <span class="built_in">log</span> files:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line">path.logs: /var/log/elasticsearch     ----日志存放路径</span><br><span class="line">network.host: 0.0.0.0                 -----配置为0.0.0.0时自动绑定本机。</span><br><span class="line">http.port: 9200                       -----对外提供服务的端口</span><br><span class="line">transport.tcp.port: 9300              -----配置用于集群节点间通信的端口</span><br><span class="line">transport.tcp.compress: true          -----集群节点间通信时进行压缩</span><br><span class="line"></span><br><span class="line">discovery.seed_hosts: ["192.168.52.131:9300","192.168.52.132:9300", "192.168.52.133:9300"]</span><br><span class="line">-------集群各节点IP地址，也可以使用es，xxx.com等名称，但是需要配置host</span><br><span class="line"></span><br><span class="line">cluster.initial_master_nodes: ["node-1","node-2","node-3"]</span><br><span class="line">--------初始话一个新集群式需要此配置来选举master</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>另外两个节点，只需更改node.name为对应的值即可。分别启动以后就能成功启动集群</p>
+<h3>集群</h3>
+<h4>集群状态</h4>
+命令：  /_cluster/health?pretty
+<img src="/ES-2/2.png" class="img" width="500" height="200">
+green:所有主分片和副本分片处于active可用状态。<br>
+yellow:所有主分片处于active可用，但不是所有副本分片都处于active。<br>
+red:不是所有的主要分片都可用。<br>
+<img src="/ES-2/1.png" class="img" width="500" height="200">
+停止master节点，集群将会重新选举master，并进行分片重新分配。<br>
+停止data节点，集群状态转为yellow，一段时间后重新分配节点。<br>
+
+<h4>分布式文档</h4>
+在集群里面保存一个文档，这个文档应该存储在那个节点？随机还是轮询？<br>
+在ES中，会采用计算的方式确定存储在那个节点：
+<img src="/ES-2/3.png" class="img" width="500" height="200">
+
+<h4>文档写操作</h4>
+<img src="/ES-2/4.png" class="img" width="500" height="200">
+
+<h4>文档搜索</h4>
+<img src="/ES-2/5.png" class="img" width="500" height="200">
+
+<h4>全文搜索</h4>
+<img src="/ES-2/6.png" class="img" width="500" height="200">
+<img src="/ES-2/7.png" class="img" width="500" height="200">
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
+          
+            <a href="/tags/ELK/" rel="tag"># ELK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/15/es-study/" rel="next" title="【ELK学习-3】-ElasticSearch基础(1)">
+                <i class="fa fa-chevron-left"></i> 【ELK学习-3】-ElasticSearch基础(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://cdn.pixabay.com/photo/2016/11/23/01/15/adorable-1851650_1280.jpg" alt="DukeoHu">
+            
+              <p class="site-author-name" itemprop="name">DukeoHu</p>
+              <p class="site-description motion-element" itemprop="description">Lifelong Learning</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+<br>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29966565&auto=0&height=66"></iframe>
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">集群节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">4种节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">三节点集群搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.1.</span> <span class="nav-text">集群状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.2.</span> <span class="nav-text">分布式文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.3.</span> <span class="nav-text">文档写操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.4.</span> <span class="nav-text">文档搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">3.5.</span> <span class="nav-text">全文搜索</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DukeoHu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
